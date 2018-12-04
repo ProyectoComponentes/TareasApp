@@ -1,1 +1,28 @@
-<h5>Esto es el Log in</h5>
+<div class="row">
+    <div class="col-md-3 mx-auto">
+        <div class="card ">
+            <div class="card-header text-center">
+                <h1 class="h4">
+                    Login
+                </h1>
+            </div>
+            <img class="rounded-circle mx-auto d-block logo m-4" src="/img/images.jpg" alt="Logo">
+            <div class="card-body">
+                <form action="/users/signin" method="POST">
+                    <label for="">Email</label>
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Email" autofocus>
+                    </div>
+                    <label for="">Contraseña</label>
+                    <div class="form-group">
+                        
+                        <input type="password" class="form-control" name="password" placeholder="Contraseña">
+                    </div>
+                    <button class="btn btn-primary btn-block">
+                        Ingresar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
