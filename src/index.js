@@ -38,8 +38,8 @@ app.use(session({
 
 //ROUTES
 app.use(require('./routes/'));
-app.use(require('./routes/usuarios'));
-app.use(require('./routes/tareas'));
+app.use(require('./routes/users'));
+app.use(require('./routes/tasks'));
 
 //STATIC FILES
 app.use(express.static(path.join(__dirname,'public')));
