@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const user = require('../models/User');
+
 
 router.get('/user/signup', (request, respond) => {
    respond.render('signup');
 });
-router.post('/user/signup', (request, respond) => {
+router.post('/user/signup', async (request, respond) => {
 const  { name,email, password, confirm_password} = request.body;
 const requestData = [];
 requestData.push(request.body.name,
@@ -24,7 +26,18 @@ let result = verificarInputs(requestData);
          respond.render('signup', {errors, name, email, password, confirm_password});
       }
       else{
-         respond.send('ok');
+         const emailUser = await user.findOne({email: email});
+           if (emailUser) {
+               errors.push({text: 'Este email ya existe en la base de datos.'});
+              respond.render('signup',{errors, name, password, confirm_password});
+           }else{
+              const newUser = new user({name, email, password});
+               newUser.password = await newUser.encryptPassword(password);
+                await newUser.save();
+                request.flash('success_msg', 'You are registered.');
+                respond.redirect('/');
+           }
+
       }
       
       
