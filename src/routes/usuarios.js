@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (request, respond) => {
-respond.send("api usuarios esta respondiendo");
+router.get('/usuario/signup', (request, respond) => {
+   respond.render('signup');
 });
 module.exports = router;
