@@ -1,11 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../models/User');
+const password = require('passport');
 
 
 router.get('/user/signup', (request, respond) => {
    respond.render('signup');
 });
+
+router.post('/user/signin', password.authenticate('local',{
+   
+}));
+
+
 router.post('/user/signup', async (request, respond) => {
 const  { name,email, password, confirm_password} = request.body;
 const requestData = [];
