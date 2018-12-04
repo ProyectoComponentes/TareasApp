@@ -9,7 +9,9 @@ router.get('/user/signup', (request, respond) => {
 });
 
 router.post('/user/signin', password.authenticate('local',{
-   
+       successRedirect: '/task',
+       failureRedirect: '/',
+       failureFlash: true
 }));
 
 

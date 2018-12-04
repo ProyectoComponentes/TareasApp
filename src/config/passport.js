@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 passport.use(new LocalStrategy({
      usernameField: 'email'
-},async (email,passport,done)=>{
+}, async (email, password, done) => {
   const user = await User.findOne({email: email});
   if (!user) {
       return done(null, false, {
