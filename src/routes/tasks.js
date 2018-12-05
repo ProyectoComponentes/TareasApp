@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const {isAuthenticated} = require('../helpers/autentication');
+const task = require('../models/Task');
 
-router.get('/task', isAuthenticated, (request, respond) => {
-    respond.render('Tasks/tasks');
+router.get('Tasks/add', (req, res) => {
+    res.render('Tasks/tasks');
 });
+
+router.get('/Tasks', (req, res) => {
+    res.send('Notas del usuario');
+});
+
 module.exports = router;
