@@ -35,7 +35,7 @@ app.use(method_override('_method'));
 app.use(session({
      secret: 'componentesSecretWord',
      resave: true,
-      saveUninitialized: true
+     saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
