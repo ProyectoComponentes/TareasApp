@@ -1,21 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    {{#if user}}
-    <a class="navbar-brand" href="/task"></a><strong><h2 id="nombreUusario">{{user.name}}</h2></strong>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-    
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                aria-expanded="false">Tareas</a>
-            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
-                <a class="dropdown-item" href="/task">Ver Todas las Tarea</a>
-                <a class="dropdown-item" href="#">Agregar Tarea</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/user/logout">Salir de la aplicación</a>
-            </div>
-        </li>
-       
-    </ul>
-    {{else}}
+{{#if user}}
+<a class="navbar-brand" href="/task"><strong>{{user.name}}</strong></a>
+<ul class="navbar-nav ml-auto">
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        Tareas
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="/task">Ver tareas</a>
+        <a class="dropdown-item" href="#">Agregar tarea</a>
+        
+    </div>
+</li>
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="/user/logout">Salir</a>
+    </li>
+</ul>
+</ul>
+
+{{else}}
 <a class="navbar-brand" href="/"><strong>Aplicación de Tarea</strong></a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
