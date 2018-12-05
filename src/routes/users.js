@@ -57,6 +57,10 @@ let result = verificarInputs(requestData);
 
 
 });
+router.get('/user/logout', (request, respond) => {
+   request.logout();
+   respond.redirect('/');
+});
 function verificarInputs(requestData) {
    let result =false;
    requestData.forEach(element => {
