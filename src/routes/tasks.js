@@ -24,14 +24,15 @@ router.post('/tasks/new-task', async (req, res) => {
         });
     } else {
         const task = new Task({ title, description });
+        task.user = req.user.id;
         await task.save();
         req.flash('success_msg', 'Nota agregada exitosamente')
-        res.redirect('/userNotes')
+        res.redirect('/tasks')
     }
 });
 
-router.get('/userNotes', async (req, res) => {
-    const userNotes = await Task.find().sort({ date: 'desc' });
+router.get('/tasks', async (req, res) => {
+    const userNotes = await Task.find({ user: req.user.id }).sort({ date: 'desc' });
     res.render('tasks/userNotes', { userNotes });
 });
 
@@ -44,13 +45,13 @@ router.put('/tasks/edit/:id', async (req, res) => {
     const { title, description } = req.body;
     await Task.findByIdAndUpdate(req.params.id, { title, description });
     req.flash('success_msg', 'Nota actualizada exitosamente')
-    res.redirect('/userNotes');
+    res.redirect('/tasks');
 });
 
 router.delete('/tasks/delete/:id', async (req, res) => {
     await Task.findByIdAndDelete(req.params.id);
     req.flash('success_msg', 'Nota eliminada exitosamente')
-    res.redirect('/userNotes');
+    res.redirect('/tasks');
 });
 
 module.exports = router;
