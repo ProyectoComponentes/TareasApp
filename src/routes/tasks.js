@@ -30,8 +30,19 @@ router.post('/tasks/new-task', async (req, res) => {
 });
 
 router.get('/userNotes', async (req, res) => {
-    const userNotes = await Task.find();
+    const userNotes = await Task.find().sort({ date: 'desc' });
     res.render('tasks/userNotes', { userNotes });
+});
+
+router.get('/tasks/editNote/:id', async (req, res) => {
+    const note = await Task.findById(req.params.id);
+    res.render('tasks/editNote', { note });
+});
+
+router.put('/tasks/edit/:id', async (req, res) => {
+    const { title, description } = req.body;
+    await Task.findByIdAndUpdate(req.params.id, {title, description});
+    res.redirect('/userNotes');
 });
 
 module.exports = router;

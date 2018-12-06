@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const method_override = require('method-override');
-const session =  require('express-session');
+const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 
@@ -18,24 +18,24 @@ require('./config/passport');
 
 //SETTINGS
 
-app.set('port',process.env.PORT || 3000);
-app.set('views',path.join(__dirname,'views'));
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
-    defaultLayout:'main',
-    layoutsDir: path.join(app.get('views'),'layouts'),
+    defaultLayout: 'main',
+    layoutsDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
-    extname:'.hbs'
+    extname: '.hbs'
 }));
-app.set('view engine','.hbs');
+app.set('view engine', '.hbs');
 
 
 //MEDDLEWARE
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(method_override('_method'));
 app.use(session({
-     secret: 'componentesSecretWord',
-     resave: true,
-     saveUninitialized: true
+    secret: 'componentesSecretWord',
+    resave: true,
+    saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -57,7 +57,7 @@ app.use(require('./routes/users'));
 app.use(require('./routes/tasks'));
 
 //STATIC FILES
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //SETTINGS SERVER
 app.listen(app.get('port'), () => {
