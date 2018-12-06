@@ -41,7 +41,12 @@ router.get('/tasks/editNote/:id', async (req, res) => {
 
 router.put('/tasks/edit/:id', async (req, res) => {
     const { title, description } = req.body;
-    await Task.findByIdAndUpdate(req.params.id, {title, description});
+    await Task.findByIdAndUpdate(req.params.id, { title, description });
+    res.redirect('/userNotes');
+});
+
+router.delete('/tasks/delete/:id', async (req, res) => {
+    await Task.findByIdAndDelete(req.params.id);
     res.redirect('/userNotes');
 });
 
