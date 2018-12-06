@@ -6,18 +6,12 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 
-
-
-
-
 //INITILIAZATIONS
 const app = express();
 require('./conexionDB');
 require('./config/passport');
 
-
 //SETTINGS
-
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
@@ -28,8 +22,7 @@ app.engine('.hbs', exphbs({
 }));
 app.set('view engine', '.hbs');
 
-
-//MEDDLEWARE
+//MIDDLEWARES
 app.use(express.urlencoded({ extended: false }));
 app.use(method_override('_method'));
 app.use(session({
@@ -40,7 +33,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
 
 //GLOBAL VARIABLES
 app.use((req, res, next) => {
