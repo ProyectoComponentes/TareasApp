@@ -4,7 +4,6 @@ const user = require('../models/User');
 const password = require('passport');
 const {isAuthenticated} = require('../helpers/autentication');
 
-
 router.get('/user/signup', (request, respond) => {
    respond.render('signup');
 });
@@ -14,7 +13,6 @@ router.post('/user/signin', password.authenticate('local', {
    failureRedirect: '/',
    failureFlash: true
 }));
-
 
 router.post('/user/signup', async (request, respond) => {
    const { name, email, password, confirm_password } = request.body;
@@ -58,7 +56,7 @@ router.post('/user/signup', async (request, respond) => {
 
 
 });
-router.get('/user/logout', isAuthenticated, (request, respond) => {
+router.get('/user/logout', (request, respond) => {
    request.logout();
    respond.redirect('/');
 });
