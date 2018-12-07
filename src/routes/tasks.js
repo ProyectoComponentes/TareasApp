@@ -2,8 +2,11 @@ const express = require('express');
 const router = express.Router();
 const Task = require('../models/Task');
 
-router.get('/tasks/add', (req, res) => {
-    res.render('tasks/newNote');
+
+router.get('/task',isAuthenticated, (request, respond) => {
+   
+    respond.render('Tasks/tasks');
+
 });
 
 router.post('/tasks/new-task', async (req, res) => {

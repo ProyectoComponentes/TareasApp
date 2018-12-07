@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const user = require('../models/User');
 const password = require('passport');
+const {isAuthenticated} = require('../helpers/autentication');
 
 
 router.get('/user/signup', (request, respond) => {
@@ -57,7 +58,7 @@ router.post('/user/signup', async (request, respond) => {
 
 
 });
-router.get('/user/logout', (request, respond) => {
+router.get('/user/logout', isAuthenticated, (request, respond) => {
    request.logout();
    respond.redirect('/');
 });
