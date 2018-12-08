@@ -43,16 +43,42 @@ router.get('/tasks/editNote/:id', isAuthenticated, async (req, res) => {
 });
 
 router.put('/tasks/edit/:id', isAuthenticated, async (req, res) => {
+    const requestData = [];
     const { title, description } = req.body;
-    await Task.findByIdAndUpdate(req.params.id, { title, description });
-    req.flash('success_msg', 'Tarea actualizada exitosamente')
-    res.redirect('/tasks');
+    requestData.push(req.body.title, req.body.description);
+    const errors = [];
+    let result = verificarInputs(requestData);
+
+    if (result === false) {
+        const { title, description } = req.body;
+        await Task.findByIdAndUpdate(req.params.id, { title, description });
+        req.flash('success_msg', 'Tarea actualizada exitosamente')
+        res.redirect('/tasks/');
+    } else {
+        errors.push({ text: 'Hay campos vacíos' });
+        const note = await Task.findById(req.params.id);
+
+        res.render('tasks/editNote', {
+            errors, note
+        });
+    }
 });
 
 router.delete('/tasks/delete/:id', isAuthenticated, async (req, res) => {
     await Task.findByIdAndDelete(req.params.id);
-    req.flash('success_msg', 'Tarea eliminada exitosamente')
+    req.flash('success_msg', 'Tarea eliminada exitosamente');
     res.redirect('/tasks');
 });
+
+function verificarInputs(requestData) {
+    let result = false;
+    requestData.forEach(element => {
+        if (element === "") {
+            result = true;
+        }
+    });
+
+    return result;
+}
 
 module.exports = router;

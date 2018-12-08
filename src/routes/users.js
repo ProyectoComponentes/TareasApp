@@ -10,7 +10,8 @@ router.get('/user/signup', (request, respond) => {
 
 router.post('/user/signin', password.authenticate('local', {
    successRedirect: '/tasks',
-   failureRedirect: '/',
+   failureRedirect: '/',  
+   badRequestMessage: 'Hay campos vacios',
    failureFlash: true
 }));
 
@@ -42,7 +43,7 @@ router.post('/user/signup', async (request, respond) => {
             const newUser = new user({ name, email, password });
             newUser.password = await newUser.encryptPassword(password);
             await newUser.save();
-            request.flash('success_msg', 'You are registered.');
+            request.flash('success_msg', 'Registro exitoso');
             respond.redirect('/');
          }
 
